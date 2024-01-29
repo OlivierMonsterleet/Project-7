@@ -2,8 +2,9 @@ import streamlit as st
 import pandas
 import pickle
 import requests
-from io import BytesIO
-import plost
+# from io import BytesIO
+# import plost
+
 
 ############################################
 
@@ -57,7 +58,8 @@ with col2:
 data_filtered = data_light.loc[data['SK_ID_CURR']==cid_input]
 pred = model.predict_proba(data_filtered)
 st.write("La probabilité du client ",cid_input, "d'avoir une diifculté de paiement de crédit est : ")
-st.write(pred)        
+st.write(pred)  
+
         
 ######## affichage du client sélectionné #######################
 client_df = data.loc[data['SK_ID_CURR']==cid_input]
@@ -67,6 +69,9 @@ client_df
 ######### affichage de toutes les données ######################
 transpose1 = data.mean().to_frame().T               
 transpose_inv = transpose1.mul(-1)
+
+#transpose1 = transpose1.drop(columns=['index','TARGET'])
+#transpose1_inv = transpose1_inv.drop(columns=['index','TARGET'])
 
 transpose_inv['scope'] = 'all'
 transpose1['scope'] = 'client'
