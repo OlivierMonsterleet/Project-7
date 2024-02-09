@@ -1,45 +1,33 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[ ]:
+# In[1]:
 
 
-from ..api import get_ids #..src.api
-from ..api import show_data #..src.api
-from ..api import get_client_detail
-from ..api import get_predictions
-#import pandas as pd
-#import logging
 
-#logging.basicConfig(filename='test.log', level=logging.DEBUG) #, format='%(asctime)s - %(message)s', datefmt='%d-%b-%y %H:%M:%S' )
+from ..P7_API import get_all_data
+from ..P7_API import get_all_data_json 
+from ..P7_API import get_client_data
+from ..P7_API import get_client_prediction
+from ..P7_API import get_client_predict_proba
 
-def test_get_ids():
-    ids = get_ids()
-    print(f'le dataset contient {len(ids.values())} ids')
-    #logging.debug(msg='1er essai log')
-    # test qui doit passer
-    assert len(ids.values()) >= 1
-    
-    # test qui ne doit être KO (test CI/GitHub Actions):
-    #assert len(ids.values()) ==1
-    
-def test_client_details(cid=101077):
-    data = get_client_detail(cid)
+
+import pandas as pd
+import pytest
+import pickle
+
+data = pickle.load(open('data_opti_metier.pkl','rb'))
+
+
+def test_client_details(cid=370048):
+    data = get_client_data()
     print(f'id test = {cid}')
     print(data['AMT_ANNUITY'])
-    assert data['AMT_ANNUITY']==46143
+    assert data['AMT_ANNUITY']==49500.0
+    
+    
+#def test_target_col(data):
+#    """Test that the train dataframe has a 'target' column"""
+#    assert 'TARGET' in data.columns
 
-def test_show_data():
-    df=show_data()
-    print(df.columns.to_list())
-    assert df.columns.to_list()==['SK_ID_CURR','FLAG_OWN_CAR','FLAG_OWN_REALTY','AMT_INCOME_TOTAL','AMT_CREDIT','AMT_ANNUITY','AMT_GOODS_PRICE','CNT_FAM_MEMBERS','EXT_SOURCE_1','EXT_SOURCE_2',
-                     'EXT_SOURCE_3','client_age','client_prof_exp','Cash_loans','GENDER_FEMALE','active_client','relationship']
-
-def test_get_prediction(cid=101077):
-    pred=get_predictions(cid)
-    #print (type(pred))
-    print (pred["prediction"])
-    print (pred['proba_rembour'])
-    assert pred["prediction"]=='Crédit accepté'
-    assert pred['proba_rembour']==0.49
 
