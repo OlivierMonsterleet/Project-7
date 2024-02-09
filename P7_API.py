@@ -64,7 +64,7 @@ app
 
 
 @app.route("/hello/")
-def hello3():
+def hello():
         return json.dumps("hello")
 
 
@@ -74,7 +74,7 @@ def hello3():
 
 
 @app.route("/get_all_data/",methods=['GET'])
-def get_all_data4():
+def get_all_data():
     return (data.to_dict())
 
 
@@ -91,7 +91,7 @@ def get_all_data_json():
 
 
 @app.route("/get_client_data",methods=['GET'])
-def get_client_data18():
+def get_client_data():
     cid=request.args.get('cid')
     data_filtered = data.loc[data['SK_ID_CURR']==cid]
     return (data_filtered.to_json())
@@ -106,7 +106,7 @@ def get_client_data18():
 
 
 @app.route("/get_client_prediction", methods=['GET'])
-def get_client_prediction2():
+def get_client_prediction():
     cid=request.args.get('cid')
     data_filtered = data.loc[data['SK_ID_CURR']==cid]
     
@@ -119,7 +119,7 @@ def get_client_prediction2():
 
          
 @app.route("/get_client_predict_proba", methods=['GET'])
-def get_client_predict_proba2():
+def get_client_predict_proba():
     
     cid=request.args.get('cid')
     
