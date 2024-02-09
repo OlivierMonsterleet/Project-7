@@ -24,7 +24,7 @@ import numpy as np
 
 
 ################ CHARGEMENT DATA #######################
-url = 'http://127.0.0.1:8050/get_all_data_json/'
+url = 'https://p7-api-web-service-z5hp.onrender.com/get_all_data_json/'
 #url = 'https://p7-api-web-service.onrender.com/get_all_data_json/'
 
 #data=st.dataframe(requests.get(url))#.content
