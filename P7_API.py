@@ -106,7 +106,7 @@ def get_client_data18(cid):
 
 
 @app.route("/get_client_prediction", methods=['GET'])
-def get_client_prediction2(cid):
+def get_client_prediction2():
     cid=request.args.get('cid')
     data_filtered = data.loc[data['SK_ID_CURR']==cid]
     
@@ -119,7 +119,7 @@ def get_client_prediction2(cid):
 
 
 @app.route("/get_client_predict_proba", methods=['GET'])
-def get_client_predict_proba3(cid):
+def get_client_predict_proba3():
     
     cid=request.args.get('cid')
     
