@@ -90,7 +90,7 @@ def get_all_data_json():
 # In[16]:
 
 
-@app.route("/get_client_data/<cid>",methods=['GET'])
+@app.route("/get_client_data",methods=['GET'])
 def get_client_data18(cid):
     cid=request.args.get('cid')
     data_filtered = data.loc[data['SK_ID_CURR']==cid]
@@ -105,7 +105,7 @@ def get_client_data18(cid):
 # In[10]:
 
 
-@app.route("/get_client_prediction/<cid>", methods=['GET'])
+@app.route("/get_client_prediction", methods=['GET'])
 def get_client_prediction2(cid):
     cid=request.args.get('cid')
     data_filtered = data.loc[data['SK_ID_CURR']==cid]
@@ -118,7 +118,7 @@ def get_client_prediction2(cid):
 # In[13]:
 
 
-@app.route("/get_client_predict_proba/<cid>", methods=['GET'])
+@app.route("/get_client_predict_proba", methods=['GET'])
 def get_client_predict_proba3(cid):
     
     cid=request.args.get('cid')
@@ -126,7 +126,7 @@ def get_client_predict_proba3(cid):
     data_filtered = data.loc[data['SK_ID_CURR']==cid]
     
     pred = model.predict_proba(data_filtered)
-    return str(pred[0])  # mettre zéro le model retourne un dataframe
+    return str(pred[0])
 
 
 
