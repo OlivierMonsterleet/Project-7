@@ -118,7 +118,7 @@ def get_client_prediction2(cid):
 # In[13]:
 
 
-@app.route("/get_client_predict_proba/<cid>", methods=['GET']))
+@app.route("/get_client_predict_proba/<cid>", methods=['GET'])
 def get_client_predict_proba3(cid):
     
     cid=request.args.get('cid')
