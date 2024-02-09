@@ -49,7 +49,7 @@ app
 # In[18]:
 
 
-url = 'http://127.0.0.1:8050/'
+#url = 'http://127.0.0.1:8050/'
 
 
 # In[ ]:
@@ -91,7 +91,7 @@ def get_all_data_json():
 
 
 @app.route("/get_client_data",methods=['GET'])
-def get_client_data18(cid):
+def get_client_data18():
     cid=request.args.get('cid')
     data_filtered = data.loc[data['SK_ID_CURR']==cid]
     return (data_filtered.to_json())
@@ -123,8 +123,8 @@ def get_client_predict_proba3():
     
     cid=request.args.get('cid')
     
-    data_filtered = data.loc[data['SK_ID_CURR']==cid]
-    
+    data_filtered = data.loc[data['SK_ID_CURR']==int(cid)]
+    #data_filtered=data_filtered.drop(columns=['SK_ID_CURR'])
     pred = model.predict_proba(data_filtered)
     return str(pred[0])
 
