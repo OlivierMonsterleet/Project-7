@@ -117,9 +117,9 @@ def get_client_prediction2():
 
 # In[13]:
 
-
-@app.route("/get_client_predict_proba", methods=['GET'])
-def get_client_predict_proba3():
+         
+@app.route("/get_client_predict_proba", methods=['GET','POST'])
+def get_client_predict_proba2():
     
     cid=request.args.get('cid')
     
@@ -127,7 +127,6 @@ def get_client_predict_proba3():
     #data_filtered=data_filtered.drop(columns=['SK_ID_CURR'])
     pred = model.predict_proba(data_filtered)
     return str(pred[0])
-
 
 
 # In[17]:
