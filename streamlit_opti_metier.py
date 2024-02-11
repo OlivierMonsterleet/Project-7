@@ -92,7 +92,7 @@ st.bar_chart(data=merged_data.T)
 
 ################# DISTRIBUTION ################################
 fig, ax = plt.subplots()
-ax.hist(data, bins=20)
+ax.hist(client_df, bins=20)
 plt.title('Distribution des données du client')
 plt.xlabel("DATA")
 plt.ylabel("Volume")
