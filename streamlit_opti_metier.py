@@ -34,13 +34,6 @@ data = requests.get(url)
 data = json.loads(data.text)
 data = pd.DataFrame.from_dict(data)
 
-
-
-
-# data_pickle = pickle.load(open('data_opti_metier.pkl','rb'))
-
-
-# data = data_pickle[['SK_ID_CURR',    'TARGET',                    'EXT_SOURCE_1',                    'EXT_SOURCE_2',                    EXT_SOURCE_3',                      'PAYMENT_RATE',                      'DAYS_BIRTH',                     'DAYS_EMPLOYED',                     'DAYS_EMPLOYED_PERC',                      'DAYS_REGISTRATION',                      'DAYS_ID_PUBLISH',                   'AMT_ANNUITY','ANNUITY_INCOME_PERC',                      'REGION_POPULATION_RELATIVE',                      'DAYS_LAST_PHONE_CHANGE',                     'INCOME_CREDIT_PERC',                    'INCOME_PER_PERSON']]  # 17 colonnes
                         
 #model = pickle.load(open('model_opti_metier.pkl','rb'))
 #url = 'http://127.0.0.1:8050/get_client_prediction/313224'
@@ -65,11 +58,11 @@ data_light = data_filtered.drop(columns=['SK_ID_CURR','TARGET'])
 
 ########## PREDICT PROBA #######################################
 from time import sleep
-#url = 'https://p7-api-web-service-z5hp.onrender.com/get_client_predict_proba'
-url = 'https://p7-api-web-service-z5hp.onrender.com/get_client_prediction'
+url = 'https://p7-api-web-service-z5hp.onrender.com/get_client_predict_proba'
 pred=requests.get(url, params = {'cid': cid_input})
+st.write(cid_input)
+st.write("La probabilité du client est : ")
 #pred = model.predict_proba(data_light)
-st.write("La probabilité du client de ne pas avoir de difficulté de paiement de crédit est : ")
 st.write(pred.text)  
 
 
