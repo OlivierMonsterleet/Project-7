@@ -99,6 +99,13 @@ plt.ylabel("Volume")
 st.pyplot(fig)
 
 fig, ax = plt.subplots()
+ax.hist(data, bins=20)
+plt.title('Distribution des données du client')
+plt.xlabel("DATA")
+plt.ylabel("Volume")
+st.pyplot(fig)
+
+fig, ax = plt.subplots()
 ax.hist(data['EXT_SOURCE_1'], bins=20)
 plt.title('Distribution des données du client')
 plt.xlabel("EXT_SOURCE_1")
