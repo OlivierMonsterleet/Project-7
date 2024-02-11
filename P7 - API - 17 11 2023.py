@@ -15,17 +15,29 @@
 # pip install pytest
 
 
+# In[41]:
+
+
+# pip install -U pytest
+import pytest
+
+
+# In[42]:
+
+
+pytest
+
+
 # In[ ]:
 
 
 
 
 
-# In[1]:
+# In[43]:
 
 
-from flask import Flask
-from flask import request
+from flask import Flask, request
 import requests
 import pickle
 import json
@@ -34,66 +46,88 @@ import pandas as pd
 import numpy as np
 
 
-# In[3]:
+# In[6]:
+
+
+import pkg_resources
+pkg_resources.get_distribution('flask').version
+
+
+# In[63]:
 
 
 app = Flask(__name__)
 
-
-data = pickle.load(open('data_opti_metier.pkl','rb'))
+ 
+data = pickle.load(open('data_opti_metier.pkl','rb'))   #----------------> 17 colonnes !!!!!!
 model = pickle.load(open('model_opti_metier.pkl','rb'))
 
 app
 
 
-# In[18]:
+# In[47]:
 
 
 url = 'http://127.0.0.1:8050/'
 
 
+
+# In[54]:
+
+
+
+
+
 # In[ ]:
 
 
-#   http://127.0.0.1:8050/get_client_data/248265
+
+
+
+# In[ ]:
 
 
 
 
-# In[7]:
+
+# In[69]:
 
 
 @app.route("/hello/")
-def hello3():
+def hello():
         return json.dumps("hello")
 
 
 # # get_all_data en dictionnary
 
-# In[8]:
+# In[70]:
 
 
-@app.route("/get_all_data/",methods=['GET'])
-def get_all_data4():
+@app.route("/get_all_data/")
+def get_all_data():
     return (data.to_dict())
 
 
+# # get_all_data en JSON
 
-# In[11]:
+# In[71]:
 
 
-@app.route("/get_all_data_json/",methods=['GET'])
+@app.route("/get_all_data_json/")
 def get_all_data_json():
     return (data.to_json())
 
 
-# In[16]:
+# # get_client_data
+
+# In[72]:
 
 
-@app.route("/get_client_data/<cid>",methods=['GET'])
-def get_client_data18(cid):
-    cid=request.args.get('cid')
+@app.route("/get_client_data/<cid>")
+def get_client_data(cid):
+    cid = int(cid) # transfo en integer à forcer
     data_filtered = data.loc[data['SK_ID_CURR']==cid]
+
     return (data_filtered.to_json())
 
 
@@ -102,67 +136,84 @@ def get_client_data18(cid):
 
 
 
-# In[10]:
+
+# # get_prediction(client_id ex:370048)
+
+# In[73]:
 
 
-@app.route("/get_client_prediction/<cid>", methods=['GET'])
-def get_client_prediction2(cid):
-    cid=request.args.get('cid')
+@app.route("/get_client_prediction/<cid>")
+def get_client_prediction(cid):
+    cid = int(cid) # transfo en integer à forcer
     data_filtered = data.loc[data['SK_ID_CURR']==cid]
-    
+    data_filtered = data_filtered.drop(columns=['TARGET','SK_ID_CURR'])  #---> on revient aux 15 champs du modèle
     pred = model.predict(data_filtered)
     return str(pred[0])  # mettre zéro le model retourne un dataframe
     
 
 
-# In[13]:
+# # get_client_predict_proba
+
+# In[74]:
 
 
-@app.route("/get_client_predict_proba/<cid>", methods=['GET']))
-def get_client_predict_proba3(cid):
+@app.route("/get_client_predict_proba/<cid>")
+def get_client_predict_proba1(cid):
     
-    cid=request.args.get('cid')
+    cid = int(cid) # transfo en integer à forcer
     
     data_filtered = data.loc[data['SK_ID_CURR']==cid]
-    
+    data_filtered = data_filtered.drop(columns=['TARGET','SK_ID_CURR'])  #---> on revient aux 15 champs du modèle
     pred = model.predict_proba(data_filtered)
     return str(pred[0])  # mettre zéro le model retourne un dataframe
 
 
+# # LANCEMENT DE L API
 
-# In[17]:
+# In[75]:
 
 
-#LANCEMENT DE L API
 if __name__ == '__main__':
     print("L API a démarré !")
-    app.run(debug=False, host='0.0.0.0')
+    app.run(debug=False, port=8050)  
     
     
 
 
-# In[4]:
+# In[6]:
 
 
-# In[5]:
+data.columns. values. tolist()
 
 
-'''data1 = data[['EXT_SOURCE_1','EXT_SOURCE_2','EXT_SOURCE_3',
-                      'PAYMENT_RATE',
-                      'DAYS_BIRTH',
-                      'DAYS_EMPLOYED',
-                      'DAYS_EMPLOYED_PERC',
-                      'DAYS_REGISTRATION',
-                      'DAYS_ID_PUBLISH',
-                      'AMT_ANNUITY',
-                      'ANNUITY_INCOME_PERC',
-                      'REGION_POPULATION_RELATIVE',
-                      'DAYS_LAST_PHONE_CHANGE',
-                     'INCOME_CREDIT_PERC','INCOME_PER_PERSON']]
-data1'''
+# 
+
+# In[ ]:
+
+
+
 
 
 # In[ ]:
 
 
+
+
+
+# In[58]:
+
+
+data
+# 196588
+
+
+# In[68]:
+
+
+cid = 370048
+#data = data.drop(columns=['SK_ID_CURR'])
+data_filtered = data.loc[data['SK_ID_CURR']==cid]
+data_filtered = data_filtered.drop(columns=['TARGET','SK_ID_CURR'])
+pred = model.predict_proba(data_filtered)
+pred
 
