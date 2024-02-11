@@ -27,6 +27,7 @@ import json
 
 def test_client_details(cid=370048):
     data = get_client_data()
+    data = json.loads(data)
     
     print(f'id test = {cid}')
     print(data['AMT_ANNUITY'])
@@ -61,6 +62,8 @@ def test_get_all_data():
 
         
 def test_get_prediction(cid=101077):
+    data=get_all_data_json()
+    data = json.loads(data
     pred=get_predictions(cid)
     print (pred["prediction"])
     print (pred['proba_rembour'])
