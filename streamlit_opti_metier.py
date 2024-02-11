@@ -100,7 +100,7 @@ st.pyplot(fig)
 
 
 fig, ax = plt.subplots()
-ax.hist([client_df[EXT_SOURCE_1'], bins=20)
+ax.hist(client_df['EXT_SOURCE_1'], bins=20)
 plt.title('Distribution des données du client')
 plt.xlabel("EXT_SOURCE_1")
 plt.ylabel("Volume")
