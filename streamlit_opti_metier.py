@@ -1,13 +1,11 @@
 import streamlit as st
 import pickle
-import requests  # GET à utiliser params=json {SK ID}
+import requests
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 import json
 
-# from io import BytesIO
-# import plost
 
 
 ############################################
@@ -26,16 +24,16 @@ import json
 
 ################ CHARGEMENT DATA #######################
 url = 'https://p7-api-web-service-z5hp.onrender.com/get_all_data_json/'
-#url = 'https://p7-api-web-service.onrender.com/get_all_data_json/'
 
-#data=st.dataframe(requests.get(url))#.content
+
+
 data = requests.get(url)
-#data.raise_for_status()
+
 data = json.loads(data.text)
 data = pd.DataFrame.from_dict(data)
 
                         
-#model = pickle.load(open('model_opti_metier.pkl','rb'))
+#model= pickle.load(open('model_opti_metier.pkl','rb'))
 #url = 'http://127.0.0.1:8050/get_client_prediction/313224'
 
         
@@ -62,7 +60,7 @@ url = 'https://p7-api-web-service-z5hp.onrender.com/get_client_predict_proba'
 pred=requests.get(url, params = {'cid': cid_input})
 st.write(cid_input)
 st.write("La probabilité du client est : ")
-pred = model.predict_proba(data_light)
+pred = model.predict_proba(data_filtered)
 st.write(pred.text)  
 
 
