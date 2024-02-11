@@ -22,21 +22,23 @@ import requests
 import json
 
 
-data = pickle.load(open('data_opti_metier.pkl','rb'))
+#data = pickle.load(open('data_opti_metier.pkl','rb'))
 
 
 def test_client_details(cid=370048):
     data = get_client_data()
+    
     print(f'id test = {cid}')
     print(data['AMT_ANNUITY'])
     assert data['AMT_ANNUITY']==49500.0
     
     
 def test_target_col(data):
-    """Test that the train dataframe has a 'target' column"""
+    data=get_all_data_json()
+    data = json.loads(data)
     assert 'TARGET' in data.columns
 
-
+####################################################################################
 def test_get_all_data():
     data=get_all_data_json()
     data = json.loads(data)
