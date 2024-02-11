@@ -1,0 +1,28 @@
+name: auto test while pushing P7_API.py 
+
+on:
+  push:
+    branches:
+      - main
+    
+jobs:  
+  build:
+    runs-on: 'ubuntu-latest'
+    steps:
+    - name: Check out repository code
+      uses: actions/checkout@v3
+    - name : Set-up Python V3.9.13
+      uses: actions/setup-python@v3
+      with:
+        python-version: 3.9.13
+    - name : Install Dependancies
+      run: |
+        pip install -r requirements.txt
+        pip install pytest
+    - name: Test with pytest
+      run: |
+        pytest #python -m pytest
+# Ajout suite à session mentorat pour lancer le déploiement uniquement si test OK
+    - name: Deploy
+      
+      run: wget https://api.render.com/deploy/srv-cn2v09f109ks73ele2gg?key=bZE7Fbz6Fsg
