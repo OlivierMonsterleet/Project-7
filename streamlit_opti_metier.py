@@ -62,7 +62,7 @@ url = 'https://p7-api-web-service-z5hp.onrender.com/get_client_predict_proba'
 pred=requests.get(url, params = {'cid': cid_input})
 st.write(cid_input)
 st.write("La probabilité du client est : ")
-#pred = model.predict_proba(data_light)
+pred = model.predict_proba(data_light)
 st.write(pred.text)  
 
 
