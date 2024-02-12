@@ -9,28 +9,6 @@
 # !pip install plost
 
 
-# In[20]:
-
-
-# pip install pytest
-
-
-# In[1]:
-
-
-# pip install -U pytest
-import pytest
-
-
-# In[42]:
-
-
-pytest
-
-
-# In[ ]:
-
-
 
 
 
@@ -74,14 +52,7 @@ url = 'http://127.0.0.1:8050/'
 # In[47]:
 
 
-#data = data.drop(columns=['SK_ID_CURR','TARGET'])
-data
 
-
-# In[54]:
-
-
-data
 
 
 # In[ ]:
@@ -164,7 +135,6 @@ def get_client_prediction1(cid):
     
 
 
-# # get_client_predict_proba
 
 # In[4]:
 
@@ -190,100 +160,4 @@ if __name__ == '__main__':
     app.run(debug=False, port=8050)  
     
     
-
-
-# In[6]:
-
-
-data.columns. values. tolist()
-
-
-# 
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[58]:
-
-
-data
-# 196588
-
-
-# In[68]:
-
-
-cid = 370048
-#data = data.drop(columns=['SK_ID_CURR'])
-data_filtered = data.loc[data['SK_ID_CURR']==cid]
-data_filtered = data_filtered.drop(columns=['TARGET','SK_ID_CURR'])
-pred = model.predict_proba(data_filtered)
-pred
-
-
-# In[65]:
-
-
-data_filtered
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[40]:
-
-
-
-
-
-# 
-
-# In[ ]:
-
-
-
-
-
-# 
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
 
