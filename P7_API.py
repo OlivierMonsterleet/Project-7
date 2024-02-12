@@ -109,7 +109,7 @@ def get_client_data():
 def get_client_prediction():
     cid=request.args.get('cid')
     data_filtered = data.loc[data['SK_ID_CURR']==cid]
-    
+    data_filtered = data_filtered.drop(columns=['TARGET','SK_ID_CURR']) 
     pred = model.predict(data_filtered)
     return str(pred[0])  # mettre zéro le model retourne un dataframe
     
