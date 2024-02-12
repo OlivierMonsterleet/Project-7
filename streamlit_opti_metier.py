@@ -34,7 +34,7 @@ data = pd.DataFrame.from_dict(data)
 
                         
 #model= pickle.load(open('model_opti_metier.pkl','rb'))
-#url = 'http://127.0.0.1:8050/get_client_prediction/313224'
+
 
         
 ##### MENU DEROULANT ##############
@@ -60,7 +60,8 @@ url = 'https://p7-api-web-service-z5hp.onrender.com/get_client_predict_proba'
 pred=requests.get(url, params = {'cid': cid_input})
 st.write(cid_input)
 st.write("La probabilité du client est : ")
-pred = model.predict_proba(data_filtered)
+#pred = model.predict_proba(data_filtered)
+
 st.write(pred.text)  
 
 
