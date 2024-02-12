@@ -54,14 +54,12 @@ data_filtered = data.loc[data['SK_ID_CURR']==cid_input]
 data_light = data_filtered.drop(columns=['SK_ID_CURR','TARGET']) 
 
 
-########## PREDICT PROBA #######################################
-from time import sleep
-url = 'https://p7-api-web-service-z5hp.onrender.com/get_client_predict_proba'
+########## PREDICTION #######################################
+url = 'https://p7-api-web-service-z5hp.onrender.com/get_client_prediction'
 pred=requests.get(url, params = {'cid': cid_input})
-st.write(cid_input)
+avis=requests.get(url, params = {'avis': avis})
 st.write("La probabilité du client est : ")
 #pred = model.predict_proba(data_filtered)
-
 st.write(pred.text)  
 
 
