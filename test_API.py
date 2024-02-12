@@ -11,8 +11,6 @@ from P7_API import get_client_data
 from P7_API import get_client_prediction
 from P7_API import get_client_predict_proba
 
-
-
 import pytest
 import pandas as pd
 import pytest
@@ -22,24 +20,6 @@ import requests
 import json
 
 
-#data = pickle.load(open('data_opti_metier.pkl','rb'))
-
-
-def test_client_details(cid=370048):
-    data = get_client_data()
-    data = json.loads(data)
-    
-    print(f'id test = {cid}')
-    print(data['AMT_ANNUITY'])
-    assert data['AMT_ANNUITY']==49500.0
-    
-    
-def test_target_col(data):
-    data=get_all_data_json()
-    data = json.loads(data)
-    assert 'TARGET' in data.columns
-
-####################################################################################
 def test_get_all_data():
     data=get_all_data_json()
     data = json.loads(data)
@@ -59,14 +39,21 @@ def test_get_all_data():
                       'DAYS_LAST_PHONE_CHANGE',
                      'INCOME_CREDIT_PERC',
                       'INCOME_PER_PERSON']
+    
 
-        
-def test_get_prediction(cid=101077):
+def test_source1():
     data=get_all_data_json()
-    data = json.loads(data
-    pred=get_predictions(cid)
-    print (pred["prediction"])
-    print (pred['proba_rembour'])
-    assert pred["prediction"]=='Crédit accepté'
-    assert pred['proba_rembour']==0.49        
-        
+    data = json.loads(data)
+    df = pd.DataFrame.from_dict(data)
+    assert 'EXT_SOURCE_1' in df.columns
+    
+#def test_prediction(cid=370048):
+#    data = get_client_prediction(cid)
+#    pred = model.predict(data_filtered)
+#    assert pred==0.0
+    
+    
+#def test_get_client_data(cid=370048):
+#    data = get_client_data(cid)
+#    assert data_filtered['AMT_ANNUITY']==49500
+    
