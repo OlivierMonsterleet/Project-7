@@ -179,7 +179,7 @@ def get_client_predict_proba1(cid):
     else:
         avis="Le crédit est accepté"
     
-    return {str(pred[0]),avis}  # mettre zéro le model retourne un dataframe
+    return {str(pred[0]),avis} 
 
 
 # # LANCEMENT DE L API
