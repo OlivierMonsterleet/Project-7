@@ -57,9 +57,10 @@ data_light = data_filtered.drop(columns=['SK_ID_CURR','TARGET'])
 ########## PREDICTION #######################################
 url = 'https://p7-api-web-service-z5hp.onrender.com/get_client_predict_proba'
 pred=requests.get(url, params = {'cid': cid_input})
-st.write("La probabilité du client est : ")
-st.write(pred.text)  
-#st.write(pred[1].text)
+pred = json.loads(pred.text)
+st.write("La proba du client selectionne est (proba/1-proba) :")
+st.write(pred[0])
+st.write(pred[1])
 
         
 ######## affichage du client sélectionné #######################
