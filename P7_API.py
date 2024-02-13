@@ -9,10 +9,32 @@
 # !pip install plost
 
 
+# In[20]:
+
+
+# pip install pytest
+
+
+# In[1]:
+
+
+# pip install -U pytest
+#import pytest
+
+
+# In[ ]:
 
 
 
-# In[2]:
+
+
+# In[ ]:
+
+
+
+
+
+# In[32]:
 
 
 from flask import Flask, request
@@ -24,14 +46,14 @@ import pandas as pd
 import numpy as np
 
 
-# In[6]:
+# In[33]:
 
 
 import pkg_resources
 pkg_resources.get_distribution('flask').version
 
 
-# In[3]:
+# In[38]:
 
 
 app = Flask(__name__)
@@ -50,6 +72,13 @@ url = 'http://127.0.0.1:8050/'
 
 
 # In[47]:
+
+
+#data = data.drop(columns=['SK_ID_CURR','TARGET'])
+data
+
+
+# In[ ]:
 
 
 
@@ -125,16 +154,13 @@ def get_client_prediction1(cid):
     data_filtered = data.loc[data['SK_ID_CURR']==cid]
     data_filtered = data_filtered.drop(columns=['TARGET','SK_ID_CURR'])  #---> on revient aux 15 champs du modèle
     pred = model.predict(data_filtered)
-    if(pred>0.65): #[0][1]
-        avis="Le crédit est refusé"
-    else:
-        avis="Le crédit est accepté"
-    print(avis)
-    print(pred)
-    return {str(pred[0]),avis}  # mettre zéro le model retourne un dataframe
+
+    
+    return str(pred[0])  # mettre zéro le model retourne un dataframe
     
 
 
+# # get_client_predict_proba
 
 # In[4]:
 
@@ -147,7 +173,13 @@ def get_client_predict_proba1(cid):
     data_filtered = data.loc[data['SK_ID_CURR']==cid]
     data_filtered = data_filtered.drop(columns=['TARGET','SK_ID_CURR'])  #---> on revient aux 15 champs du modèle
     pred = model.predict_proba(data_filtered)
-    return str(pred[0])  # mettre zéro le model retourne un dataframe
+    
+    if(pred[0][0]>0.65):
+        avis="Le crédit est refusé"
+    else:
+        avis="Le crédit est accepté"
+    
+    return {str(pred[0]),avis}  # mettre zéro le model retourne un dataframe
 
 
 # # LANCEMENT DE L API
@@ -160,4 +192,94 @@ if __name__ == '__main__':
     app.run(debug=False, port=8050)  
     
     
+
+
+# In[ ]:
+
+
+
+
+
+# 
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[39]:
+
+
+data
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[40]:
+
+
+
+
+
+# 
+
+# In[ ]:
+
+
+
+
+
+# 
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
 
