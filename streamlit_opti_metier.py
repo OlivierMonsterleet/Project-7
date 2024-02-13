@@ -58,8 +58,8 @@ data_light = data_filtered.drop(columns=['SK_ID_CURR','TARGET'])
 url = 'https://p7-api-web-service-z5hp.onrender.com/get_client_predict_proba'
 pred=requests.get(url, params = {'cid': cid_input})
 st.write("La probabilité du client est : ")
-st.write(pred[0][0].text)  
-st.write(pred[0][1].text)  
+st.write(pred[0].text)  
+st.write(pred[1].text)
 
         
 ######## affichage du client sélectionné #######################
