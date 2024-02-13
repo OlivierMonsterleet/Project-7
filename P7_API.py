@@ -166,20 +166,20 @@ def get_client_prediction1(cid):
 
 
 @app.route("/get_client_predict_proba/<cid>")
-def get_client_predict_proba1(cid):
+def get_client_predict_proba():
     
-    cid = int(cid) # transfo en integer à forcer
+    cid=request.args.get('cid')
     
     data_filtered = data.loc[data['SK_ID_CURR']==cid]
     data_filtered = data_filtered.drop(columns=['TARGET','SK_ID_CURR'])  #---> on revient aux 15 champs du modèle
+    
     pred = model.predict_proba(data_filtered)
-    
-    if(pred[0][0]>0.65):
-        avis="Le crédit est refusé"
+    if (pred[0][0]>0.65):
+        avis = "Credit refuse"
     else:
-        avis="Le crédit est accepté"
-    
-    return {str(pred[0]),avis} 
+        avis = "Credit accepte"
+        
+    return [str(pred[0]), avis] 
 
 
 # # LANCEMENT DE L API
