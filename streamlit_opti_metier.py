@@ -36,6 +36,8 @@ data = pd.DataFrame.from_dict(data)
 #model= pickle.load(open('model_opti_metier.pkl','rb'))
 
 
+st.image('Pret_a_depenser_logo.png', caption='Prêt à dépenser')
+
         
 ##### MENU DEROULANT ##############
 liste_clients = data['SK_ID_CURR']
@@ -57,7 +59,7 @@ data_light = data_filtered.drop(columns=['SK_ID_CURR','TARGET'])
 ########## PREDICT PROBA #######################################
 url = 'https://p7-api-web-service-z5hp.onrender.com/get_client_predict_proba'
 pred=requests.get(url, params = {'cid': cid_input})
-st.write("La proba du client selectionne est (proba/1-proba) :")
+st.write("La proba du client selectionné est (proba/1-proba) :")
 st.write(pred.text)
 
 

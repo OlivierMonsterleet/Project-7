@@ -76,10 +76,10 @@ def get_client_predict_proba():
     ## PY suppression id client car le modele attend 15 données et pas 16
     data_filtered=data_filtered.drop(columns=['SK_ID_CURR','TARGET'])
     pred = model.predict_proba(data_filtered)
-    if (pred[0][0]>0.65):
-        avis = "Credit refuse"
+    if (pred[0][0] > 0.6354045785420402):
+        avis = "La probabilité du client est supérieure au seuil d'acceptabilité, le credit est ACCEPTE."
     else:
-        avis = "Credit accepte"
+        avis = "La probabilité du client est inférieure au seuil d'acceptabilité, le credit est REFUSE."
         
     return [str(pred[0]), avis] #str(pred[0]),  # mettre zéro le model retourne un dataframe
 
