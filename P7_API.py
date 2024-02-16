@@ -38,11 +38,6 @@ def get_client_data():
     data_filtered = data.loc[data['SK_ID_CURR']==int(cid)]
     data_filtered=data_filtered.drop(columns=['SK_ID_CURR','TARGET'])
     return (data_filtered.to_json())
-
-
-
-
-
 # %%
 
 
@@ -52,12 +47,8 @@ def get_client_prediction():
     print (cid)
     data_filtered = data.loc[data['SK_ID_CURR']==int(cid)]
     print (data_filtered)
-
-
     data_filtered=data_filtered.drop(columns=['SK_ID_CURR','TARGET'])
-     
     pred = model.predict(data_filtered)
-
     return str(pred[0])  # mettre zéro le model retourne un dataframe
 
     
@@ -65,21 +56,17 @@ def get_client_prediction():
 
 
 # %%
-## Nouvelle Version PY 03/02/24 appel dynamique depuis dashboard Streamlit
-
 @app.route("/get_client_predict_proba", methods=['GET'])
 def get_client_predict_proba():
     
     cid=request.args.get('cid')
-    
     data_filtered = data.loc[data['SK_ID_CURR']==int(cid)]
-    ## PY suppression id client car le modele attend 15 données et pas 16
     data_filtered=data_filtered.drop(columns=['SK_ID_CURR','TARGET'])
     pred = model.predict_proba(data_filtered)
     if (pred[0][0] > 0.6354045785420402):
-        avis = "La probabilité du client est supérieure au seuil d'acceptabilité, le credit est ACCEPTE."
+        avis = "La probabilité du client est superieure au seuil d'acceptabilite, le credit est ACCEPTE."
     else:
-        avis = "La probabilité du client est inférieure au seuil d'acceptabilité, le credit est REFUSE."
+        avis = "La probabilité du client est inferieure au seuil d'acceptabilite, le credit est REFUSE."
         
     return [str(pred[0]), avis] #str(pred[0]),  # mettre zéro le model retourne un dataframe
 
@@ -93,9 +80,5 @@ if __name__ == '__main__':
     app.run(debug=False, host='0.0.0.0')   # avant port 12993
     #app.run(debug=False, host='https://p7-api-web-service.onrender.com/')
     ##app.run()
-
-# %%
-
-# %%
 
 # %%
