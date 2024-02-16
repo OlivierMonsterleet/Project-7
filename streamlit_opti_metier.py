@@ -23,7 +23,7 @@ import json
 
 
 ################ CHARGEMENT DATA #######################
-url = 'https://p7-api-web-service-z5hp.onrender.com/get_all_data_json/'
+url = 'https://p7-api-web-service-z5hp.onrender.com/get_all_data_json'
 
 
 
@@ -54,13 +54,14 @@ data_filtered = data.loc[data['SK_ID_CURR']==cid_input]
 data_light = data_filtered.drop(columns=['SK_ID_CURR','TARGET']) 
 
 
-########## PREDICTION #######################################
+########## PREDICT PROBA #######################################
 url = 'https://p7-api-web-service-z5hp.onrender.com/get_client_predict_proba'
 pred=requests.get(url, params = {'cid': cid_input})
-pred = json.loads(pred.text)
 st.write("La proba du client selectionne est (proba/1-proba) :")
-st.write(pred[0])
-st.write(pred[1])
+st.write(pred.text)
+
+
+
 
         
 ######## affichage du client sélectionné #######################
