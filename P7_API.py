@@ -64,7 +64,7 @@ def get_client_predict_proba():
     data_filtered=data_filtered.drop(columns=['SK_ID_CURR','TARGET'])
     pred = model.predict_proba(data_filtered)
     
-    if (pred[0][0] > 0.6354045785420402):
+    if (pred[0][0] > 0.7020000000000001):
         avis = "La probabilite du client est superieure au seuil d'acceptabilite, le credit est ACCEPTE."
     else:
         avis = "La probabilite du client est inferieure au seuil d'acceptabilite, le credit est REFUSE."
