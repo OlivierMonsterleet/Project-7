@@ -4,7 +4,7 @@
 # # Développement de l'API
 
 # %%
-from flask import Flask
+from flask import Flask, jsonify
 import requests
 import pickle
 import json
@@ -21,7 +21,7 @@ app = Flask(__name__)
 # %%
 data = pickle.load(open('data_opti_metier.pkl','rb'))
 model = pickle.load(open('model_opti_metier.pkl','rb'))
-
+explainer = shap.TreeExplainer(model)
 
 # %%
 @app.route('/get_all_data_json', methods=['GET'])
@@ -65,13 +65,22 @@ def get_client_predict_proba():
     pred = model.predict_proba(data_filtered)
     
     if (pred[0][0] > 0.7020000000000001):
-        avis = "La probabilite du client est superieure au seuil d'acceptabilite, le credit est ACCEPTE."
+        avis = "La probabilite du client est superieure au seuil d'acceptabilite (0.7), le credit est ACCEPTE."
     else:
-        avis = "La probabilite du client est inferieure au seuil d'acceptabilite, le credit est REFUSE."
+        avis = "La probabilite du client est inferieure au seuil d'acceptabilite (0.7), le credit est REFUSE."
         
     return [str(pred[0]), avis] #str(pred[0]),  # mettre zéro le model retourne un dataframe
 
 
+@app.route("/get_client_shap", methods=['GET'])
+def fct_shap ():
+    cid=request.args.get('cid')
+    data_filtered = data.loc[data['SK_ID_CURR']==int(cid)]
+    data_filtered=data_filtered.drop(columns=['SK_ID_CURR','TARGET'])
+    
+    shap_values = explainer(data_filtered)
+    
+    return  jsonify(shap_values)
 
 
 # %%
