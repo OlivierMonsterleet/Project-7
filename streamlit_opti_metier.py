@@ -90,9 +90,18 @@ merged_data = merged_data.set_index('scope')
 merged_data=merged_data.drop(columns=['SK_ID_CURR'])
 st.dataframe(merged_data)
 
+
+
 ######### BAR CHARTS ###########################################
-st.write("BAR charts des données du client VS globales")
+st.write("")
+st.markdown("""
+            <h1 style="color:#03224c;font-size:1.9em;font-style:italic;font-weight:700;margin:0px;">
+            Barchats des données du client VS données globales</h1>
+            """, 
+            unsafe_allow_html=True)
 st.bar_chart(data=merged_data.T)
+
+
 
 # +
 ################# DISTRIBUTION ################################
@@ -109,6 +118,7 @@ liste_variables = list(data_sans_id_sk.columns)
 colonne_input = st.selectbox("Sélectionnez une variable à étudier ", (liste_variables))
 
 
+color = '#00f900'
 fig, (ax1, ax2) = plt.subplots(nrows=1, ncols=2, figsize=(15, 5))
 ax1.hist(client_df[colonne_input], bins=20)
 ax2.hist(data[colonne_input], bins=20)
