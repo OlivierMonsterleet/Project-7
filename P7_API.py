@@ -77,13 +77,13 @@ def get_client_predict_proba():
 
 
 
-@app.route("/get_client_shap", methods=['GET'])
-def fct_shap():
-    cid=request.args.get('cid')
-    data_filtered = data.loc[data['SK_ID_CURR']==int(cid)]                 
-    data_filtered=data_filtered.drop(columns=['SK_ID_CURR','TARGET'])
-    shap_values = explainer(data_filtered)
-    return (shap_values.to_json())
+#@app.route("/get_client_shap", methods=['GET'])
+#def fct_shap():
+#    cid=request.args.get('cid')
+#    data_filtered = data.loc[data['SK_ID_CURR']==int(cid)]                 
+#    data_filtered=data_filtered.drop(columns=['SK_ID_CURR','TARGET'])
+#    shap_values = explainer(data_filtered)
+#    return (shap_values.to_json())
     #return jsonify(shap_values[0,:,1])
     
 
