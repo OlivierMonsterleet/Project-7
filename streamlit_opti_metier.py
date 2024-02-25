@@ -10,7 +10,7 @@ import json
 import numpy as np
 from PIL import Image
 import streamlit.components.v1 as components
-from streamlit_shap import st_shap 
+from streamlit_shap import st_shap
 import shap
 from flask import Flask, request
 
