@@ -32,4 +32,4 @@ TESTINGS:
 For local testings, at root level, run pytest in terminal
 
 While pushing to Github a new version, testings are performed automatically. If passed then auto deployment on 
-https://dashboard.render.com/web/srv-cmn90v0cmk4c73e6pdeg](https://dashboard.render.com/web/srv-cn2v09f109ks73ele2gg)https://dashboard.render.com/web/srv-cn2v09f109ks73ele2gg
+https://dashboard.render.com/web/srv-cn2v09f109ks73ele2gg
