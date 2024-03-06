@@ -35,10 +35,10 @@ with col3:
 
 ##### CHARGEMENT DES DONNEES ##############
 
-url = 'https://p7-api-web-service.onrender.com/get_all_data_json'
+url = 'https://p7-api-web-service-z5hp.onrender.com/get_all_data_json'
+
 
 data = requests.get(url)
-
 data = json.loads(data.text)
 data = pd.DataFrame.from_dict(data)
 model = pickle.load( open('model_opti_metier.pkl','rb'))
@@ -64,8 +64,7 @@ with col2:
 
 # +
 ########## PREDICTION ###############
-#from time import sleep
-#url = 'http://127.0.0.1:5000/get_client_predict_proba'
+
 
 url = 'https://p7-api-web-service.onrender.com/get_client_predict_proba'
 response=requests.get(url, params = {'cid': cid_input})
@@ -122,6 +121,38 @@ plt.figure(figsize=(8,4))
 
 
 
+st_shap(shap.bar_plot(explainer.shap_values(client_df[[
+    'EXT_SOURCE_1',
+    'EXT_SOURCE_2',
+    'EXT_SOURCE_3',
+    'PAYMENT_RATE',
+    'DAYS_BIRTH',
+    'DAYS_EMPLOYED',
+    'DAYS_EMPLOYED_PERC',
+    'DAYS_REGISTRATION',
+    'DAYS_ID_PUBLISH',
+    'AMT_ANNUITY',
+    'ANNUITY_INCOME_PERC',
+    'REGION_POPULATION_RELATIVE',
+    'DAYS_LAST_PHONE_CHANGE',
+    'INCOME_CREDIT_PERC',
+    'INCOME_PER_PERSON']].values.reshape(1,-1))[0][0],\
+              feature_names=[
+    'EXT_SOURCE_1',
+    'EXT_SOURCE_2',
+    'EXT_SOURCE_3',
+    'PAYMENT_RATE',
+    'DAYS_BIRTH',
+    'DAYS_EMPLOYED',
+    'DAYS_EMPLOYED_PERC',
+    'DAYS_REGISTRATION',
+    'DAYS_ID_PUBLISH',
+    'AMT_ANNUITY',
+    'ANNUITY_INCOME_PERC',
+    'REGION_POPULATION_RELATIVE',
+    'DAYS_LAST_PHONE_CHANGE',
+    'INCOME_CREDIT_PERC',
+    'INCOME_PER_PERSON'],max_display=15))
 
         
 # +
