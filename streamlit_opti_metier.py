@@ -29,13 +29,12 @@ with col2:
 with col3:
     st.sidebar.write("")
 
-# +
-#st.image('logo_projet_fintech.png',width = 150)
-# -
+
 
 ##### CHARGEMENT DES DONNEES ##############
 
 url = 'https://p7-api-web-service-z5hp.onrender.com/get_all_data_json'
+#https://p7-api-web-service-z5hp.onrender.com
 
 
 data = requests.get(url)
@@ -66,7 +65,7 @@ with col2:
 ########## PREDICTION ###############
 
 
-url = 'https://p7-api-web-service.onrender.com/get_client_predict_proba'
+url = 'hhttps://p7-api-web-service-z5hp.onrender.com/get_client_predict_proba'
 response=requests.get(url, params = {'cid': cid_input})
 response = response.text
 response = json.loads(response) 
