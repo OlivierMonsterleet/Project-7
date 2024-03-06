@@ -65,7 +65,7 @@ with col2:
 ########## PREDICTION ###############
 
 
-url = 'hhttps://p7-api-web-service-z5hp.onrender.com/get_client_predict_proba'
+url = 'https://p7-api-web-service-z5hp.onrender.com/get_client_predict_proba'
 response=requests.get(url, params = {'cid': cid_input})
 response = response.text
 response = json.loads(response) 
