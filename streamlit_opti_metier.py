@@ -31,7 +31,7 @@ with col3:
 
 
 
-##### CHARGEMENT DES DONNEES ##############
+##### CHARGEMENT DES DONNEES DU CLOUD RENDER ##############
 
 url = 'https://p7-api-web-service-z5hp.onrender.com/get_all_data_json'
 #https://p7-api-web-service-z5hp.onrender.com
@@ -40,6 +40,7 @@ url = 'https://p7-api-web-service-z5hp.onrender.com/get_all_data_json'
 data = requests.get(url)
 data = json.loads(data.text)
 data = pd.DataFrame.from_dict(data)
+data = data.drop(columns=['TARGET'])
 model = pickle.load( open('model_opti_metier.pkl','rb'))
 explainer = shap.TreeExplainer(model)
 
