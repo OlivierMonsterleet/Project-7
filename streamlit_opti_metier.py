@@ -70,7 +70,7 @@ with col2:
 url = 'https://p7-api-web-service.onrender.com/get_client_predict_proba'
 response=requests.get(url, params = {'cid': cid_input})
 response = response.text
-response = json.loads(response) ## Ne fonctionne pas sur streamlit déployé
+response = json.loads(response) 
 pred_decision = response[1]
 pred_proba = response[0]
 st.button("Décision de crédit (min. requis= 0.7): "+pred_decision+" (Score = "+pred_proba[1:5]+")", type="secondary")
@@ -122,38 +122,8 @@ plt.figure(figsize=(8,4))
 
 
 
-st_shap(shap.bar_plot(explainer.shap_values(client_df[[
-    'EXT_SOURCE_1',
-    'EXT_SOURCE_2',
-    'EXT_SOURCE_3',
-    'PAYMENT_RATE',
-    'DAYS_BIRTH',
-    'DAYS_EMPLOYED',
-    'DAYS_EMPLOYED_PERC',
-    'DAYS_REGISTRATION',
-    'DAYS_ID_PUBLISH',
-    'AMT_ANNUITY',
-    'ANNUITY_INCOME_PERC',
-    'REGION_POPULATION_RELATIVE',
-    'DAYS_LAST_PHONE_CHANGE',
-    'INCOME_CREDIT_PERC',
-    'INCOME_PER_PERSON']].values.reshape(1,-1))[0][0],\
-              feature_names=[
-    'EXT_SOURCE_1',
-    'EXT_SOURCE_2',
-    'EXT_SOURCE_3',
-    'PAYMENT_RATE',
-    'DAYS_BIRTH',
-    'DAYS_EMPLOYED',
-    'DAYS_EMPLOYED_PERC',
-    'DAYS_REGISTRATION',
-    'DAYS_ID_PUBLISH',
-    'AMT_ANNUITY',
-    'ANNUITY_INCOME_PERC',
-    'REGION_POPULATION_RELATIVE',
-    'DAYS_LAST_PHONE_CHANGE',
-    'INCOME_CREDIT_PERC',
-    'INCOME_PER_PERSON'],max_display=15))
+
+        
 # +
 ################# DISTRIBUTION ################################
 st.markdown("""
